@@ -2,7 +2,7 @@
   <div id="app" ref="app" class="swiper-container">
     <div class="ys-container">
       <div class="video">
-       <video id="videoSource" controls="controls" ref="video" autoplay="autoplay" preload="auto">
+       <video id="videoSource" controls="controls" ref="video" autoplay="autoplay" preload="auto" loop='loop'>
         <!-- <source :src="url" type="video/mp4"> -->
       </video>
       </div>
@@ -226,6 +226,7 @@ export default {
       if(e && e.keyCode==9){ // 按 tab
         _this.fullScreen()
       }
+      console.log(e.keyCode)
       switch (e.keyCode) {
         case 32: 
           _this.goOut()
@@ -318,6 +319,14 @@ export default {
           // getStr(".xt_m7", _click, 0)
           _this.goLeft()
           break;
+        case 38: // zuo
+          // getStr(".xt_m7", _click, 0)
+          _this.source(38)
+          break;
+        case 38: // zuo
+          // getStr(".xt_m7", _click, 0)
+          _this.source(40)
+          break;
       }
     }
     this.$refs.video.src = this.url
@@ -381,6 +390,7 @@ export default {
               }
             })
           } else {
+            this.isDown = true
             this._isShow()
           }
         }
@@ -409,6 +419,7 @@ export default {
        let myvideo = document.querySelector('.video video')
         myvideo.pause()
         myvideo.currentTime = 0
+        myvideo.volume = 0
         }
     },
     goLeft () {
@@ -417,11 +428,20 @@ export default {
         // let video = $('.video video')[0]
          let myvideo = document.querySelector('.video video')
         myvideo.play()
-        
+        myvideo.volume = 1
         $('.ys-container').animate({
           "left": '0'
         })
       }
+    },
+    source () {
+      let myvideo = document.querySelector('.video video')
+      if (val === 38) {
+        myvideo.volume = myvideo.volume + 0.1
+      } else {
+        myvideo.volume = myvideo.volume - 0.1
+      }
+      
     }
   },
   components: {
