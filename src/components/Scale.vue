@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted () {
-    localStorage.setItem('img', this.img)
+    
     let w = $(window).width() / 2 - $('.scale .xt-scale').width() / 2
     let h = $(window).height() / 2 - $('.scale .xt-scale').height() / 2
     if (this.isGo) {

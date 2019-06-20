@@ -399,8 +399,7 @@ export default {
       if (this.del && this.isspeak.length !== 0) {
         this.isspeak = this.isspeak.filter(item => item !== el + num)
         
-        if (this.isShow && this.img !== localStorage.getItem('img')) {
-          
+        if (this.isShow && el=== localStorage.getItem('img')) {
           this.left = $(ele).offset().left
           this.top = $(ele).offset().top
           this.img = ele.querySelector('.right img').src
@@ -456,6 +455,7 @@ export default {
               },
               time: 1000,
               cb: () => {
+                localStorage.setItem('img', el)
                 this._isShow()
                 this.isDown = true
                 this.isspeak.push(el + num)
