@@ -41,6 +41,7 @@ export default {
     }
   },
   mounted () {
+    localStorage.setItem('img', this.img)
     let w = $(window).width() / 2 - $('.scale .xt-scale').width() / 2
     let h = $(window).height() / 2 - $('.scale .xt-scale').height() / 2
     if (this.isGo) {
@@ -70,7 +71,7 @@ export default {
 .scale {
   width: 19.2rem;
   height: 10.8rem;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   .xt-scale {

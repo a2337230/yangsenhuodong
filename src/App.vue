@@ -189,9 +189,10 @@
             </div>
           </div>
         </div>
+        <scale v-if="isShow" :scaleleft="left" :scaletop="top" :isGo="isGo" :scaleNum="scaleNum" :img="img" @ishide="_isShow"></scale>
       </div>
     </div>
-    <scale v-if="isShow" :scaleleft="left" :scaletop="top" :isGo="isGo" :scaleNum="scaleNum" :img="img" @ishide="_isShow "></scale>
+    
   </div>
 </template>
 
@@ -215,7 +216,8 @@ export default {
       swiper: null,
       isTab: false,
       isDown: true,
-      url: 'https://vd1.bdstatic.com/mda-hegzw868ep72e2x5/sc/mda-hegzw868ep72e2x5.mp4?playlist=%5B%22hd%22%2C%22sc%22%5D&auth_key=1559619053-0-0-62624d23bdfc4779d4a215a35b8b3c7c&bcevod_channel=searchbox_feed&pd=bjh&abtest=all'
+      url: './../static/images/教育赋能活动宣传片V1.4.mp4',
+      del: false
     }
   },
   mounted() {
@@ -223,8 +225,118 @@ export default {
     
     document.onkeydown=function(event) {
     var e = event || window.event || arguments.callee.caller.arguments[0];
-      if(e && e.keyCode==9){ // 按 tab
-        _this.fullScreen()
+      // if(e && e.keyCode==9){ // 按 tab
+      //   _this.fullScreen()
+      // }
+      // if (e.keyCode === 81 && e.keyCode === 9) {
+      //   alert(1)
+      // }
+      if (e.keyCode === 8) {
+        _this.del = true
+        console.log(_this.del)
+      }
+      if (this.isTab) {
+        switch (e.keyCode) {
+        case 32: 
+          _this.goOut()
+          break;
+        case 81: // Q
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m10", 0)
+          break;
+        case 87: // K
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m6", 0)
+          break;
+        case 69: // E
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m4", 0)
+          break;
+        case 82: // R
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m2", 0)
+          break;   
+        case 84: // T
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m1", 0)
+          break;   
+        case 89: // Y
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m1", 1)
+          break;   
+        case 85: // U
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m2", 1)
+          break; 
+        case 73: // I
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m4", 1)
+          break;  
+        case 79: // O
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m6", 1)
+          break; 
+        case 80: // P
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m10", 1)
+          break;
+        case 65: // A
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m9", 0)
+          break;
+        case 83: // S
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m5", 0)
+          break;
+        case 68: // D
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m3", 0)
+          break;
+        case 70: // F
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m3", 1)
+          break;
+        case 71: // G
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m5", 1)
+          break;
+        case 72: // H
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m9", 1)
+          break;
+        case 74: // J
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m8", 0)
+          break;
+        case 75: // K
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m7", 0)
+          break;
+        case 76: // L
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m8", 1)
+          break;
+        case 90: // L
+          // getStr(".xt_m7", _click, 0)
+          _this.getStr (".xt_m11", 0)
+          break;
+        case 39: // you
+          // getStr(".xt_m7", _click, 0)
+          _this.goRight()
+          break;
+        case 37: // zuo
+          // getStr(".xt_m7", _click, 0)
+          _this.goLeft()
+          break;
+        case 38: // zuo
+          // getStr(".xt_m7", _click, 0)
+          _this.source(38)
+          break;
+        case 38: // zuo
+          // getStr(".xt_m7", _click, 0)
+          _this.source(40)
+          break;
+        }
       }
       console.log(e.keyCode)
       switch (e.keyCode) {
@@ -333,8 +445,7 @@ export default {
     let myvideo = document.querySelector('.video video')
     setTimeout(() => {
       myvideo.play()
-    }, 100)
-    
+    }, 100) 
   },
   methods: {
     fullScreen(){
@@ -364,7 +475,52 @@ export default {
     },
     getStr (el, num) {
       let _this = this
-      
+      if (!this.isTab) {
+        return
+      }
+      let ele = $(el).children()[num]
+      if (this.del && this.isspeak.length !== 0) {
+        this.isspeak = this.isspeak.filter(item => item !== el + num)
+        
+        if (this.isShow && this.img !== localStorage.getItem('img')) {
+          
+          this.left = $(ele).offset().left
+          this.top = $(ele).offset().top
+          this.img = ele.querySelector('.right img').src
+          this.goOut()
+          setTimeout(() => {
+            mTween({
+              el: ele,
+              attr: {
+                  rotateY: 0
+              },
+              time: 1000,
+              cb: () => {
+                this.del = false
+                // this.isDown = true
+
+                // this.isspeak.push(el + num)
+              }
+            })
+          }, 1000)
+        } else {
+          mTween({
+            el: ele,
+            attr: {
+                rotateY: 0
+            },
+            time: 1000,
+            cb: () => {
+              this.del = false
+            }
+          })
+        }
+        console.log(this.isspeak)
+        return false
+      } else {
+        this.del = false
+      }
+
       if (this.isGo && !this.isShow) {
         if (this.isDown) {
           this.isDown =false
