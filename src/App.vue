@@ -218,7 +218,7 @@ export default {
       swiper: null,
       isTab: false,
       isDown: true,
-      url: './../static/images/教育赋能活动宣传片V1.4.mp4',
+      url: '/static/images/jy.mp4',
       del: false
     }
   },
@@ -399,7 +399,7 @@ export default {
       if (this.del && this.isspeak.length !== 0) {
         this.isspeak = this.isspeak.filter(item => item !== el + num)
         
-        if (this.isShow && el=== localStorage.getItem('img')) {
+        if (this.isShow && el + num === localStorage.getItem('img')) {
           this.left = $(ele).offset().left
           this.top = $(ele).offset().top
           this.img = ele.querySelector('.right img').src
@@ -413,9 +413,6 @@ export default {
               time: 1000,
               cb: () => {
                 this.del = false
-                // this.isDown = true
-
-                // this.isspeak.push(el + num)
               }
             })
           }, 1000)
@@ -455,7 +452,7 @@ export default {
               },
               time: 1000,
               cb: () => {
-                localStorage.setItem('img', el)
+                localStorage.setItem('img', el + num)
                 this._isShow()
                 this.isDown = true
                 this.isspeak.push(el + num)
