@@ -1,5 +1,6 @@
 <template>
   <div id="app" ref="app" class="swiper-container" @click="full">
+    <div class="isplay" @click="full" v-if="isplay"></div>
     <div class="ys-container">
       <div class="video">
        <video id="videoSource" controls="controls" ref="video" autoplay="autoplay" preload="auto" loop='loop'>
@@ -219,7 +220,8 @@ export default {
       isTab: false,
       isDown: true,
       url: '/static/images/jy.mp4',
-      del: false
+      del: false,
+      isplay: true
     }
   },
   mounted() {
@@ -363,6 +365,7 @@ export default {
       let myvideo = document.querySelector('.video video')
       myvideo.play()
       myvideo.volume = 1
+      this.isplay = false
       this.fullScreen()
     },
     fullScreen(){
@@ -487,7 +490,7 @@ export default {
         // let video = $('.video video')[0]
        let myvideo = document.querySelector('.video video')
         myvideo.pause()
-        myvideo.currentTime = 0
+        // myvideo.currentTime = 0
         myvideo.volume = 0
         }
     },
@@ -525,6 +528,14 @@ export default {
   height: 10.8rem;
   position: relative;
   overflow: hidden;
+  .isplay {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 19.2rem;
+    height: 10.8rem;
+    z-index: 999;
+  }
   .ys-container {
     width: 38.4rem;
     display: flex;

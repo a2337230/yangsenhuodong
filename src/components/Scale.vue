@@ -46,23 +46,48 @@ export default {
     let h = $(window).height() / 2 - $('.scale .xt-scale').height() / 2
     if (this.isGo) {
       let el = document.querySelector(".xt-scale")
-      $('.xt-scale').css({
-        "left": w + 'px',
-        "top": h + 'px',
-        "transform": "scale(4)"
+      // $('.xt-scale').css({
+      //   "left": w + 'px',
+      //   "top": h + 'px',
+      //   "transform": "scale(4)"
+      // })
+      css(el, 'scale', 1)
+      mTween({
+        el: el,
+        type: 'linear',
+        attr: {
+          left: w,
+          top: h,
+          scale: 4
+        },
+        time: 1000
       })
     }
   },
   watch: {
     isGo (val) {
-      $('.xt-scale').css({
-        "left": this.scaleleft + 'px',
-        "top": this.scaletop + 'px',
-        "transform": "scale(1)"
+      // $('.xt-scale').css({
+      //   "left": this.scaleleft + 'px',
+      //   "top": this.scaletop + 'px',
+      //   "transform": "scale(1)"
+      // })
+      // setTimeout(() => {
+      //   this.$emit('ishide')
+      // },1000)
+      let el = document.querySelector(".xt-scale")
+      mTween({
+        el: el,
+        type: 'linear',
+        attr: {
+          left: this.scaleleft,
+          top: this.scaletop,
+          scale: 1
+        },
+        time: 1000,
+        cb: () => {
+          this.$emit('ishide')
+        }
       })
-      setTimeout(() => {
-        this.$emit('ishide')
-      },1000)
     }
   }
 }
@@ -83,7 +108,7 @@ export default {
     box-sizing: border-box;
     transform-style: preserve-3d;
     // position: relative;
-    transition: 1s;
+    // transition: 1s;
     img {
       width: 1.8rem;
       height: 2.06rem;
